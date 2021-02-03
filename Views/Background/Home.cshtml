@@ -1,0 +1,157 @@
+@model JdMvcHouTai.Models.UserPage
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+<div class="PublicHead clearfix">
+    <div class="leftBox clearfix">
+        <!--<div class="companyLogo"><img src="images/logo.jpg" /></div>-->
+        <!--<i class="iconfont icon-caidan Js_MenuList"></i>-->
+        <div class="companyText">订单管理系统 </div>
+    </div>
+    <div class="RightBox clearfix">
+        <a href="#">
+            <div class="dropOutBox"><i class="iconfont icon-app_icons--"></i><span>退出</span></div>
+        </a>
+    </div>
+</div>
+<div class="PublicDownWhole clearfix">
+    <!--左侧-->
+    <div class="leftBox Js_leftBox">
+        <ul><a asp-action="Home">
+                <li class="Select"><i class="iconfont icon-yonghuguanli"></i><span>用户管理</span></li>
+            </a><a asp-action="ModelAdministration">
+                <li><i class="iconfont icon-tubiao_dingdan"></i><span>管理视图UL</span></li>
+            </a>
+             <a asp-action="Provinces">
+                    <li class=""><i class="iconfont icon-tubiao_dingdan"></i><span>管理省份城市UL</span></li>
+                </a>
+            </ul>
+    </div>
+    <!--右侧-->
+    <div class="RightBox Js_RightBox">
+        <div class="PublicContentBox">
+            <!--公用指向页面名字-->
+            <div class="PublicPointToAgeText"><span class="span1">用户管理</span><span class="span2">后台用户管理列表</span>
+            </div>
+            <!--查询-->
+            <form asp-action="Home" id="Search-Search" method="GET">
+                <div class="InquireBox clearfix">
+                    <div class="InquireleftBox">
+                        <div class="Text">用户名：</div>
+                        <div class="InputDiv">
+                            <input class="phoneInput" placeholder="请输入用户名" name="SearchUserName" />
+                        </div>
+                    </div>
+                    <div class="InquireleftBox">
+                        <div class="Text">登录名：</div>
+                        <div class="InputDiv">
+                            <input class="phoneInput" placeholder="请输入登录名" name="SearchLoginName" />
+                        </div>
+                    </div>
+                    <div class="InquireleftBox">
+                        <div class="Text">名字：</div>
+                        <div class="InputDiv">
+                            <input class="phoneInput" placeholder="请输入的名字" name="SearchName" />
+                        </div>
+                    </div>
+                    <div class="PublicBtnIcon Color1Btn fr">
+                        <i class="iconfont icon-icon-chaxun"></i>
+                        <button id="search">查询</button>
+                    </div>
+                </div>
+            </form>
+            <!--表修改-->
+            <div class="InquireTableBox">
+                <div class="headbox">
+                    <div class="headboxtext"><span class="span1">后台用户管理列表</span></div>
+                    <div class="PublicBtnIcon Color2Btn fr Js_edit">
+                        <span id="span-Add">添加</span>
+                    </div>
+                </div>
+                <!--查询到的表格-->
+                <div class="InquireSelectTable">
+                    <table class="PublicTableCss">
+                        <thead>
+                            <tr>
+                                <td>用户名</td>
+                                <td>登录名</td>
+                                <td>名字</td>
+                                <td>密码</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.body)
+                            {
+                                <tr>
+                                    <td>@item.UserName</td>
+                                    <td>@item.LoginName</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.PassWord</td>
+                                    <td>
+                                        <div class="PublicTableBtnIcon Color3Btn Js_edit" >
+                                            <span class="span-Edit" id="@item.Id" data-aaaa="@item.Id">编辑</span>
+                                        </div>
+                                        <div class="PublicTableBtnIcon Color4Btn Js_delete">
+                                            <a id="Btn-DelectHome" asp-action="DelectHome" asp-route-id="@item.Id">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加用户浮层-->
+<div class="PublicFloatBox adduser">
+    <div class="f_MiddleBox wid400">
+        <div class="f_Head"><span>添加用户</span><i class="Js_closeBtn iconfont icon-buoumaotubiao20 fr"></i></div>
+        <div class="f_content">
+            <div class="f_alonediv">
+                <div class="f_alone_name">用户名:</div>
+                <div class="f_alone_input"><input class="f_p_input" asp-for="UserName" />
+                </div>
+            </div>
+            <div class="f_alonediv">
+                <div class="f_alone_name">登录名:</div>
+                <div class="f_alone_input"><input class="f_p_input" asp-for="LoginName" /></div>
+            </div>
+            <div class="f_alonediv">
+                <div class="f_alone_name">名字:</div>
+                <div class="f_alone_input"><input class="f_p_input" asp-for="Name" /></div>
+            </div>
+            <div class="f_alonediv">
+                <div class="f_alone_name">密码:</div>
+                <div class="f_alone_input"><input class="f_p_input" type="password" asp-for="PassWord" /></div>
+            </div>
+
+            <div class="f_alonediv1">
+                <div class="f_alone_name"></div>
+                <div class="f_alone_input1">
+                    <!--publicbtn-->
+                    <div class="publicf_btn">
+                        <div class="publicf_btn1">
+                            <button type="button" id="Add-Home">确定</button>
+                        </div>
+                        <button id="Add-Home-Close">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--返回顶部--><a href="javaScript:void();" class="back-to-top"><i class="iconfont icon-fanhuidingbu"></i></a>
+
+@section Scripts {
+<link href="~/css/reset.css" rel="stylesheet" />
+<link href="~/css/iconfont.css" rel="stylesheet" />
+<link href="~/css/index.css" rel="stylesheet" />
+<link href="~/css/Home.css" rel="stylesheet" />
+<script src="~/js/f.js"></script>
+<script src="~/js/Home.js"></script>
+}

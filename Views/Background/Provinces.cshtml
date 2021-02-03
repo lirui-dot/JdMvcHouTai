@@ -1,0 +1,111 @@
+@model JdMvcHouTai.Models.UserPage
+@{
+    ViewData["Title"] = "Home";
+}
+
+    <div class="PublicHead clearfix">
+        <div class="leftBox clearfix">
+            <div class="companyText">订单管理系统 </div>
+        </div>
+        <div class="RightBox clearfix">
+            <a href="#">
+                <div class="dropOutBox"><i class="iconfont icon-app_icons--"></i><span>退出</span></div>
+            </a>
+        </div>
+    </div>
+    <div class="PublicDownWhole clearfix">
+        <!--左侧-->
+        <div class="leftBox">
+            <ul><a asp-action="Home">
+                    <li class=""><i class="iconfont icon-yonghuguanli"></i><span>用户管理</span></li>
+                </a><a asp-action="ModelAdministration">
+                    <li class=""><i class="iconfont icon-tubiao_dingdan"></i><span>管理视图UL</span></li>
+                </a>
+                <a asp-action="Provinces">
+                    <li class="Select"><i class="iconfont icon-tubiao_dingdan"></i><span>管理省份城市UL</span></li>
+                </a>
+                </ul>
+        </div>
+        <!--右侧-->
+        <div class="RightBox">
+            <div class="PublicContentBox">
+                <!--公用指向页面名字-->
+                <div class="PublicPointToAgeText">
+                    <span class="span2">后台管理省份城市列表</span>
+                </div>
+                <!--表修改-->
+                <div class="InquireTableBox">
+                    <div class="headbox">
+                        <div class="headboxtext">
+                            <span class="span1">后台管理省份城市列表</span>
+                        </div>
+                        <div class="PublicBtnIcon Color2Btn fr Js_edit">
+                            <span id="span-Add">添加</span>
+                        </div>
+                    </div>
+                    <!--查询到的表格-->
+                    <div class="InquireSelectTable">
+                        <table class="PublicTableCss" id="example" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <td>Id</td>
+                                    <td>名字</td>
+                                    <td>parentId</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Province)
+                                {
+                                    <tr>
+                                        <td>@item.id</td>
+                                        <td>@item.name</td>
+                                        <td>@item.parentid</td>
+                                        <td>
+                                            <div class="PublicTableBtnIcon Color3Btn Js_edit">
+                                                <span class="span-Edit" id="@item.id" data-aaaaa="@item.id">编辑</span>
+                                            </div>
+                                            <div class="PublicTableBtnIcon Color4Btn Js_delete">
+                                                <a id="Btn-Delect" asp-action="ProvincesDelect" asp-route-id="@item.id">删除</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!--添加用户浮层-->
+    <div class="PublicFloatBox adduser">
+        <div class="f_MiddleBox wid400">
+            <div class="f_Head"><span>添加用户</span><i class="Js_closeBtn iconfont icon-buoumaotubiao20 fr"></i></div>
+            <div class="f_content">
+                <div class="f_alonediv">
+                    <div class="f_alone_name">名字:</div>
+                    <div class="f_alone_input"><input class="f_p_input" asp-for="PrvoncesName" /></div>
+                </div>
+                <div class="f_alonediv1">
+                    <div class="f_alone_name"></div>
+                    <div class="f_alone_input1">
+                        <!--publicbtn-->
+                        <div class="publicf_btn">
+                            <div class="publicf_btn1" id="Btn-Add">确定 </div>
+                            <div class="publicf_btn2 fr Js_closeBtn" id="Btn-close">取消 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section Scripts {
+<link href="~/css/reset.css" rel="stylesheet" />
+<link href="~/css/iconfont.css" rel="stylesheet" />
+<link href="~/css/index.css" rel="stylesheet" />
+<link href="~/css/dataTable.css" rel="stylesheet" />
+<link href="~/css/Provinces.css" rel="stylesheet" />
+<script src="~/js/f.js"></script>
+<script src="~/js/dataTable.js"></script>
+<script src="~/js/Provinces.js"></script>
+}

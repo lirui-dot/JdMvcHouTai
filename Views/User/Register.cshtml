@@ -1,0 +1,48 @@
+@model JdMvcHouTai.Models.UserBackgroundPage
+
+@{
+    ViewData["Title"] = "注册";
+}
+
+<div class="snow-container">
+    <div class="snow foreground"></div>
+    <div class="snow foreground layered"></div>
+    <div class="snow middleground"></div>
+    <div class="snow middleground layered"></div>
+    <div class="snow background"></div>
+    <div class="snow background layered"></div>
+</div>
+<div class="top-buttons-agileinfo"><a asp-action="Index">Sign In</a><a asp-action="Register" class="active">Sign Up</a>
+</div>
+<h1>后台管理注册页面</h1>
+<div class="main-agileits">
+    <!--form-stars-here-->
+    <div class="form-w3-agile">
+        <h2 class="sub-agileits-w3layouts">注册</h2>
+        <form asp-action="Register" method="post">
+            <div class="form-group">
+                <input type="text" asp-for="Username" placeholder="请输入用户名" required="" />
+             <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" asp-for="PassWord" placeholder="请输入密码" required="" />
+             <span asp-validation-for="PassWord" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" asp-for="CpassWord" placeholder="请再次输入密码" required="" />
+             <span asp-validation-for="CpassWord" class="text-danger"></span>
+            </div>
+            
+            
+            <div class="submit-w3l">
+                <input type="submit" value="注册">
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/snow.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+}
