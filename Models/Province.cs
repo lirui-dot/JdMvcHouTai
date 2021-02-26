@@ -9,12 +9,10 @@ namespace JdMvcHouTai.Models
         [JsonProperty(PropertyName = "code")]
         public int id { get; set; }
         public string name { get; set; }
-        [NotMapped]
-        public List<Province> children { get; set; }
 
         [JsonProperty(PropertyName = "codes")]
         public int parentid { get; set; }
-        
+
 
         public string parentname { get; set; }
 
@@ -25,9 +23,10 @@ namespace JdMvcHouTai.Models
         public string depth { get; set; }
 
     }
-    public class ProvinceDet{
-        public int code{get;set;}
-        public string name{get;set;}
+    public class ProvinceDet
+    {
+        public int code { get; set; }
+        public string name { get; set; }
     }
     [NotMapped]
     public class ProvinceDetails
@@ -35,6 +34,12 @@ namespace JdMvcHouTai.Models
         public int status { get; set; }
         public string msg { get; set; }
         public List<Province> result { get; set; }
+    }
+    public class ProvinceView
+    {
+        public int recordsTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public List<Province> data { get; set; }
     }
 
 }

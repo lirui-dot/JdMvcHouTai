@@ -1,10 +1,24 @@
+
 $(document).ready(function () {
-    $('#example').DataTable();
+    $('#example').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "https://localhost:5001/Background/ProvincesLoading",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "parentid" },
+        ]
+    });
+});
+
+$(function () {
     $('#Btn-close').click(function () {
         window.location.href = "https://localhost:5001/Background/Provinces";
     })
-});
-$(function () {
     $('#span-Add').click(function () {
         $('#Btn-Add').click(function () {
             var hobby = $('#PrvoncesName').val();
@@ -19,7 +33,7 @@ $(function () {
                     window.location.href = "https://localhost:5001/Background/Provinces";
                 }
             })
-        })
+        }) 
     })
 })
 $(function () {

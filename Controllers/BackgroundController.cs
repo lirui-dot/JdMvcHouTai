@@ -10,6 +10,7 @@ namespace JdMvcHouTai.Controllers
     {
         private readonly UserContext _context;
 
+
         public BackgroundController(UserContext context)
         {
             _context = context;
@@ -142,6 +143,7 @@ namespace JdMvcHouTai.Controllers
         public async Task<IActionResult> ModelAdd([FromBody] string HobbyClassification)
         {
             //异步添加兴趣爱好
+
             Hobby hobby = new Hobby();
             hobby.HobbyClassification = HobbyClassification;
             if (hobby != null)
@@ -174,9 +176,47 @@ namespace JdMvcHouTai.Controllers
         }
         public IActionResult Provinces()
         {
-            var province = _context.Provinces.ToList();
-            ViewBag.Province = province;
+            //加载所有省份 
+            // var province = _context.Provinces.ToList();
+            // ViewBag.Province = province;
+            /*  */
             return View();
+        }
+        [HttpPost]
+        public IActionResult ProvincesLoading(int length, int start)
+        {
+            ProvinceView view = new ProvinceView();
+            //加载所有省份
+            var searchValue = Request.Form["search[value]"].FirstOrDefault();
+
+            //查询所有省份
+            var province = _context.Provinces.ToList();
+
+            //加载所有省份的数量
+            view.recordsTotal = province.Count();
+            if (searchValue != "")
+            {
+                province = _context.Provinces.Where(s => s.id.ToString().Contains(searchValue)
+                               || s.name.Contains(searchValue)
+                               || s.parentid.ToString().Contains(searchValue)).ToList();
+            }
+
+            //查询到的省份的数量
+            view.recordsFiltered = province.Count();
+
+            if (start.ToString() != "0")
+            {
+                province = province.Skip(start).Take(length).ToList();
+            }
+            else
+            {
+                province = province.Skip(start).Take(length).ToList();
+            }
+
+            view.data = province;
+
+
+            return Json(view);
         }
         public async Task<IActionResult> ProvincesDelect(int? id)
         {
